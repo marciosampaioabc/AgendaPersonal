@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Agende um novo compromisso</h2>
+<form method="POST" action="{{ url_for('schedule') }}">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.nome.label }}<br>
+        {{ form.nome(size=32) }}
+    </div>
+    <div>
+        {{ form.valor.label }}<br>
+    {% if form.valor.data %}
+        {% set valor_str = '%.2f' % form.valor.data %}
+        {% set valor_str = valor_str.replace('.', ',') %}
+        {{ form.valor(size=32, value=valor_str) }}
+    {% else %}
+        {{ form.valor(size=32) }}
+    {% endif %}
+    </div>
+    <div>
+        {{ form.data.label }}<br>
+        {{ form.data() }}
+    </div>
+    <div>
+        {{ form.hora.label }}<br>
+        {{ form.hora() }}
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+{% endblock %}

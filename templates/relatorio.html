@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Relatório de Aulas Marcadas</h2>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Valor</th>
+        <th>Data</th>
+        <th>Hora</th>
+        <th>Agendado em</th>
+    </tr>
+    {% for schedule in schedules %}
+    <tr>
+        <td>{{ schedule.nome }}</td>
+        <td>R${{ '%.2f' | format(schedule.valor) }}</td>
+        <td>{{ schedule.data }}</td>
+        <td>{{ schedule.hora }}</td>
+        <td>{{ schedule.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('index') }}">Voltar</a>
+{% endblock %}
+
